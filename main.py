@@ -4,6 +4,7 @@ def reprobado(notas):
     for nota in notas:
         if nota < 60:
             desaprobacion = True
+            break
     return desaprobacion
 
 def estudiantes_search():
@@ -83,7 +84,7 @@ while True:
                         try:
                             name = input("Ingrese el nombre del curso: ")
                             note = int(input("Ingrese la nota del curso: "))
-                            if note < 0 and note > 100:
+                            if note < 0 or note > 100:
                                 print("La nota debe estar entre 0 y 100")
                             else:
                                 break
@@ -129,9 +130,10 @@ while True:
             if exist:
                 print("\n\n--------LISTA DE ESTUDIANTES--------")
                 cont = 1
-                for estudiante in estudiantes:
+                for id,estudiante in estudiantes.items():
                     print(f"\n-----ESTUDIANTE {cont}-----")
                     cont += 1
+                    print(f"ID: {id}")
                     print(f"Nombre: {estudiante['nombre']}")
                     print(f"Nota: {estudiante['nota']}")
                     print(f"Carrera: {estudiante['carrera']}")

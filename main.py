@@ -105,7 +105,7 @@ while True:
                 id_search = estudiantes_search()
                 if id_search:
                     estudiante = estudiantes[id_search]
-                    print(f"\n----- DATOS DEL ESTUDIANTE -----\nID: {id_search}\nNombre: {estudiante['nombre']}\nCarrera: {estudiante['carrera']}\n----CURSOS-----")
+                    print(f"\n\n----- DATOS DEL ESTUDIANTE -----\nID: {id_search}\nNombre: {estudiante['nombre']}\nCarrera: {estudiante['carrera']}\n----CURSOS-----")
                     notas = []
                     if not estudiante['cursos']:
                         print("El estudiante no tiene cursos")
@@ -125,7 +125,21 @@ while True:
 
 
         case 4:
-            pass
+            exist = estudiantes_exist()
+            if exist:
+                print("\n\n--------LISTA DE ESTUDIANTES--------")
+                cont = 1
+                for estudiante in estudiantes:
+                    print(f"\n-----ESTUDIANTE {cont}-----")
+                    cont += 1
+                    print(f"Nombre: {estudiante['nombre']}")
+                    print(f"Nota: {estudiante['nota']}")
+                    print(f"Carrera: {estudiante['carrera']}")
+                    print("Cursos: ")
+                    for curso in estudiante['cursos']:
+                        print(f"   Nombre: {curso['nombre']}")
+                        print(f"   Nota: {curso['nota']}")
+
         case 5:
             print("Saliendo...")
             break

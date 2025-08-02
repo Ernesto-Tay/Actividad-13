@@ -1,9 +1,36 @@
 estudiantes = {}
-def aprobado(nota):
-    aprobacion = False
-    if nota >=60:
-        aprobacion = True
-    return aprobacion
+def reprobado(notas):
+    desaprobacion = False
+    for nota in notas:
+        if nota < 60:
+            desaprobacion = True
+    return desaprobacion
+
+def estudiantes_search():
+    if not estudiantes:
+        print("No hay estudiantes inscritos aún")
+    else:
+        while True:
+            try:
+                id_search = int(input("\nIngrese la ID del estudiante: "))
+                break
+            except ValueError:
+                print("Ingrese una ID válida")
+            except Exception as e:
+                print("Error inesperado: ", e)
+
+        if id_search not in estudiantes.keys():
+            print("El estudiante no existe")
+            id_search = False
+        else:
+            return id_search
+
+def estudiantes_exist():
+    if not estudiantes:
+        print("No hay estudiantes inscritos aún")
+        return False
+    else:
+        return True
 
 def promedio(notas):
     if not notas:
@@ -14,7 +41,7 @@ def promedio(notas):
         for nota in notas:
             total += nota
             cant += 1
-        return total / cant
+        return round(total / cant,2)
 
 while True:
     print("\n\n-------- SISTEMA DE ESTUDIANTES --------\n1. Agregares estudiante\n2. Agregar cursos a un estudiante\n3. Consultar estudiante\n4. Mostrar todos los estudiantes\n5. Salir")
@@ -48,19 +75,10 @@ while True:
             }
 
         case 2:
-            if not estudiantes:
-                print("No hay estudiantes inscritos aún")
-            else:
-                try:
-                    id_search = int(input("\nIngrese la ID del estudiante: "))
-                except ValueError:
-                    print("Ingrese una ID válida")
-                except Exception as e:
-                    print("Error inesperado: ",e)
-
-                if id_search not in estudiantes.keys():
-                    print("El estudiante no existe")
-                else:
+            valid = estudiantes_exist()
+            if valid:
+                id_search = estudiantes_search()
+                if id_search:
                     while True:
                         try:
                             name = input("Ingrese el nombre del curso: ")
@@ -82,7 +100,27 @@ while True:
 
 
         case 3:
-            pass
+            valid = estudiantes_exist()
+            if valid:
+                id_search = estudiantes_search()
+                if id_search:
+                    estudiante = estudiantes[id_search]
+                    print(f"\n----- DATOS DEL ESTUDIANTE -----\nID: {id_search}\nNombre: {estudiante['nombre']}\nCarrera: {estudiante['carrera']}\n----CURSOS-----")
+                    notas = []
+                    for curso in estudiante['cursos']:
+                        print(f"\nNombre: {curso['nombre']}")
+                        print(f"Nota: {curso['nota']}")
+                        notas.append(curso['nota'])
+
+                    prom = promedio(notas)
+                    print(f"\nPromedio: {prom}")
+                    rep = reprobado(notas)
+                    if rep:
+                        print("El estudiante ha reprobado")
+                    else:
+                        print("El estudiante ha aprobado")
+
+
         case 4:
             pass
         case 5:

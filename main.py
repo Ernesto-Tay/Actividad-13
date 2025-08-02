@@ -107,18 +107,21 @@ while True:
                     estudiante = estudiantes[id_search]
                     print(f"\n----- DATOS DEL ESTUDIANTE -----\nID: {id_search}\nNombre: {estudiante['nombre']}\nCarrera: {estudiante['carrera']}\n----CURSOS-----")
                     notas = []
-                    for curso in estudiante['cursos']:
-                        print(f"\nNombre: {curso['nombre']}")
-                        print(f"Nota: {curso['nota']}")
-                        notas.append(curso['nota'])
-
-                    prom = promedio(notas)
-                    print(f"\nPromedio: {prom}")
-                    rep = reprobado(notas)
-                    if rep:
-                        print("El estudiante ha reprobado")
+                    if not estudiante['cursos']:
+                        print("El estudiante no tiene cursos")
                     else:
-                        print("El estudiante ha aprobado")
+                        for curso in estudiante['cursos']:
+                            print(f"\nNombre: {curso['nombre']}")
+                            print(f"Nota: {curso['nota']}")
+                            notas.append(curso['nota'])
+
+                        prom = promedio(notas)
+                        print(f"\nPromedio: {prom}")
+                        rep = reprobado(notas)
+                        if rep:
+                            print("El estudiante ha reprobado")
+                        else:
+                            print("El estudiante ha aprobado")
 
 
         case 4:

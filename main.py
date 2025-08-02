@@ -48,7 +48,7 @@ while True:
     print("\n\n-------- SISTEMA DE ESTUDIANTES --------\n1. Agregares estudiante\n2. Agregar cursos a un estudiante\n3. Consultar estudiante\n4. Mostrar todos los estudiantes\n5. Salir")
     select = input("Seleccione una opción: ")
     match select:
-        case 1:
+        case "1":
             while True:
                 try:
                     id = int(input("\nIngrese la ID del estudiante (5 dígitos): "))
@@ -75,7 +75,7 @@ while True:
                 "cursos": cursos
             }
 
-        case 2:
+        case "2":
             valid = estudiantes_exist()
             if valid:
                 id_search = estudiantes_search()
@@ -100,7 +100,7 @@ while True:
                     estudiante['cursos'].append(curso)
 
 
-        case 3:
+        case "3":
             valid = estudiantes_exist()
             if valid:
                 id_search = estudiantes_search()
@@ -125,7 +125,7 @@ while True:
                             print("El estudiante ha aprobado")
 
 
-        case 4:
+        case "4":
             exist = estudiantes_exist()
             if exist:
                 print("\n\n--------LISTA DE ESTUDIANTES--------")
@@ -142,6 +142,9 @@ while True:
                         print(f"   Nombre: {curso['nombre']}")
                         print(f"   Nota: {curso['nota']}")
 
-        case 5:
+        case "5":
             print("Saliendo...")
             break
+
+        case _:
+            print("Seleccione una opción válida")

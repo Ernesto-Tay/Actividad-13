@@ -26,7 +26,7 @@ while True:
                     id = int(input("\nIngrese la ID del estudiante (5 dígitos): "))
                     name = input("Ingrese el nombre del estudiante: ")
                     carrera = input("Ingrese la carrera del estudiante: ")
-                    cursos = {}
+                    cursos = []
                     id_ok = True
                     name_ok = True
                     if id <=0 or len(str(id)) != 5:
@@ -48,7 +48,39 @@ while True:
             }
 
         case 2:
-            pass
+            if not estudiantes:
+                print("No hay estudiantes inscritos aún")
+            else:
+                try:
+                    id_search = int(input("\nIngrese la ID del estudiante: "))
+                except ValueError:
+                    print("Ingrese una ID válida")
+                except Exception as e:
+                    print("Error inesperado: ",e)
+
+                if id_search not in estudiantes.keys():
+                    print("El estudiante no existe")
+                else:
+                    while True:
+                        try:
+                            name = input("Ingrese el nombre del curso: ")
+                            note = int(input("Ingrese la nota del curso: "))
+                            if note < 0 and note > 100:
+                                print("La nota debe estar entre 0 y 100")
+                            else:
+                                break
+                        except ValueError:
+                            print("Ingrese un número entero en la nota")
+                        except Exception as e:
+                            print("Error inesperado: ",e)
+                    estudiante = estudiantes[id_search]
+                    curso = {
+                        "nombre": name,
+                        "nota": note
+                    }
+                    estudiante['cursos'].append(curso)
+
+
         case 3:
             pass
         case 4:

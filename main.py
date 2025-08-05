@@ -171,12 +171,14 @@ while True:
                     cont += 1
                     print(f"ID: {id}")
                     print(f"Nombre: {estudiante['nombre']}")
-                    print(f"Nota: {estudiante['nota']}")
                     print(f"Carrera: {estudiante['carrera']}")
-                    print("Cursos: ")
-                    for curso in estudiante['cursos']:
-                        print(f"   Nombre: {curso['nombre']}")
-                        print(f"   Nota: {curso['nota']}")
+                    if estudiante['cursos']:
+                        print("Cursos: ")
+                        for curso in estudiante['cursos']:
+                            print(f"   Nombre: {curso['nombre']}")
+                            print(f"   Nota: {curso['nota']}")
+                    else:
+                        print("El estudiante aún no tiene cursos asignados")
 
         case "5":
             print("Saliendo...")

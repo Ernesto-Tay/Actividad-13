@@ -98,26 +98,36 @@ while True:
                 if id_search:
                     while True:
                         try:
-                            # ingreso de datos de un curso del estudiante
-                            name = input("Ingrese el nombre del curso: ")
-                            note = int(input("Ingrese la nota del curso: "))
-
-                            #Coroborra que la nota esté entre 0 y 100
-                            if note < 0 or note > 100:
-                                print("La nota debe estar entre 0 y 100")
-                            else:
-                                break
+                            nota_cant = int(input("\nIngrese la cantidad de cursos que añadirá: "))
+                            if nota_cant <= 0:
+                                print("El número debe ser superior a 0")
+                            break
                         except ValueError:
-                            print("Ingrese un número entero en la nota")
-                        except Exception as e:
-                            print("Error inesperado: ",e)
-                    # Define al estudiante al cual se le añadirán los cursos
-                    estudiante = estudiantes[id_search]
-                    curso = {
-                        "nombre": name,
-                        "nota": note
-                    }
-                    estudiante['cursos'].append(curso)
+                            print("Ingrese un número entero")
+
+                    for i in range(nota_cant):
+                        while True:
+                            try:
+                                # ingreso de datos de un curso del estudiante
+                                name = input(f"Ingrese el nombre del curso {i+1}: ")
+                                note = int(input("Ingrese la nota del curso: "))
+
+                                #Coroborra que la nota esté entre 0 y 100
+                                if note < 0 or note > 100:
+                                    print("La nota debe estar entre 0 y 100")
+                                else:
+                                    break
+                            except ValueError:
+                                print("Ingrese un número entero en la nota")
+                            except Exception as e:
+                                print("Error inesperado: ",e)
+                        # Define al estudiante al cual se le añadirán los cursos
+                        estudiante = estudiantes[id_search]
+                        curso = {
+                            "nombre": name,
+                            "nota": note
+                        }
+                        estudiante['cursos'].append(curso)
 
 
         case "3":
